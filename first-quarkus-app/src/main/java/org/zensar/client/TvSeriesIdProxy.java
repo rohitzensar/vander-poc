@@ -6,7 +6,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import org.jboss.resteasy.annotations.Query;
 import org.zensar.model.TvSeries;
 
 @RegisterRestClient(baseUri = "https://api.tvmaze.com")
