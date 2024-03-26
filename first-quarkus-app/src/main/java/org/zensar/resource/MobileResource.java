@@ -10,10 +10,11 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.zensar.model.Mobile;
+import org.zensar.entity.Mobile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,7 @@ public class MobileResource {
     public Response updateMobile(@PathParam("id") Integer oldMobileId,
                                  Mobile newMobile) {
         mobileList = mobileList.stream()
-                .map(mobile -> mobile.getId() == oldMobileId ? newMobile : mobile)
+                .map(mobile -> Objects.equals(mobile.id, oldMobileId) ? newMobile : mobile)
                 .collect(Collectors.toList());
 
         return Response.ok(mobileList).build();
@@ -54,7 +55,7 @@ public class MobileResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteMobile(@PathParam("id") Integer mobileId) {
         Optional<Mobile> removeMobile = mobileList.stream()
-                .filter(m -> m.getId() == mobileId)
+                .filter(m -> Objects.equals(m.getId(), mobileId))
                 .findFirst();
 
         if (removeMobile.isPresent()) {
