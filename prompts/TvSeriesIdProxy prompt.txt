@@ -1,0 +1,97 @@
+Trial 1
+convert the below Quarkus code to Spring compatible code.
+
+Trial 2
+Below is the Client-Proxy class created using Quarkus framework. Write its equivalent Spring compatible code. Use okHttp or RestTemplate
+
+Trial 3
+Below is the Client-Proxy class created using Quarkus framework. Write its equivalent Spring compatible code. Use okHttp or RestTemplate. Method getTvSeriesByPersonName returns a list of TvSeries dtos.
+
+Trial 4
+Below is the Client-Proxy class created using Quarkus framework. Write its equivalent Spring compatible code. Use okHttp or RestTemplate. Method getTvSeriesByPersonName returns a list of TvSeries dtos. Add all possible exception handling.
+
+package org.zensar.client;
+
+import jakarta.json.JsonArray;
+
+import jakarta.ws.rs.GET;
+
+import jakarta.ws.rs.Path;
+
+import jakarta.ws.rs.PathParam;
+
+import jakarta.ws.rs.QueryParam;
+
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import org.zensar.model.TvSeries;
+
+@RegisterRestClient(baseUri = "https://api.tvmaze.com")
+
+@Path("/")
+
+public interface TvSeriesIdProxy {
+
+@GET
+
+@Path("/shows/{id}")
+
+TvSeries getTvSeriesById(@PathParam("id") int id);
+
+@GET
+
+@Path("/search/person")
+
+JsonArray getTvSeriesByPersonName(@QueryParam("q") String personName);
+
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Results 
+------------------------------------------------------------------------------------------------------------------------------------------------
+Sure, here's the equivalent Spring code using RestTemplate with exception handling:
+
+package org.zensar.client;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+import org.zensar.exception.TvSeriesNotFoundException;
+import org.zensar.model.TvSeries;
+
+import java.io.IOException;
+import java.util.List;
+
+@Component
+public class TvSeriesIdProxy {
+
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final String baseUri = "https://api.tvmaze.com";
+
+    public TvSeries getTvSeriesById(int id) throws TvSeriesNotFoundException {
+        String url = baseUri + "/shows/" + id;
+        try {
+            return restTemplate.getForObject(url, TvSeries.class);
+        } catch (HttpClientErrorException ex) {
+            if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+                throw new TvSeriesNotFoundException("TV series with ID " + id + " not found");
+            } else {
+                throw ex;
+            }
+        }
+    }
+
+    public List<TvSeries> getTvSeriesByPersonName(String personName) throws IOException {
+        String url = baseUri + "/search/person?q=" + personName;
+        String response = restTemplate.getForObject(url, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<TvSeries> tvSeriesList = objectMapper.readValue(response, new TypeReference<List<TvSeries>>() {});
+        return tvSeriesList;
+    }
+}
+In this code, I added exception handling to handle the case where the TV series with the given ID is not found. If a HttpClientErrorException is thrown with a status code of NOT_FOUND, I throw a custom TvSeriesNotFoundException with a message indicating that the TV series with the given ID was not found.
+
+Note that I also added an IOException to the getTvSeriesByPersonName method signature to handle any errors that may occur during JSON deserialization.

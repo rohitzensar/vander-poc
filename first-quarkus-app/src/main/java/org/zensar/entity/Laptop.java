@@ -53,4 +53,16 @@ public class Laptop {
     public void setExternalStorage(int externalStorage) {
         this.externalStorage = externalStorage;
     }
+
+    public Laptop(String id, String name, String brand, int ram, int externalStorage) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.ram = ram;
+        this.externalStorage = externalStorage;
+    }
+
+    public Laptop() {
+
+    }
 }

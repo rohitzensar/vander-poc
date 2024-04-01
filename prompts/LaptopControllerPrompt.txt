@@ -1,3 +1,6 @@
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a Resource class written in Quarkus, write its equivalent Spring Boot Controller version. Use lombok, jakarta, and best coding practices. Dont add any text or explanation before and after the code. Don't add any Notes.
+
+
 package org.zensar.resource;
 
 import jakarta.inject.Inject;
@@ -35,11 +38,10 @@ public class LaptopResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response saveLaptop(Laptop laptop) {
-        if(laptop.getId() == null)
-            laptop.setId(String.valueOf(UUID.randomUUID()));
+        laptop.setId(String.valueOf(UUID.randomUUID()));
         String id = laptopService.addLaptop(laptop);
         if(id != null) {
             return Response.ok(URI.create("/laptops/"+id)).build();
@@ -59,7 +61,7 @@ public class LaptopResource {
     @PATCH
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateLaptop(@PathParam("id") String id, Laptop newLaptop) {
         boolean isUpdated = laptopService.updateLaptop(id, newLaptop);
         if(isUpdated) {

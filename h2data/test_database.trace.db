@@ -1,0 +1,3 @@
+2024-03-27 00:19:29.994507+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "LAPTOP" already exists; SQL statement:
+CREATE TABLE Laptop (     id VARCHAR(255),     brand VARCHAR(255),     externalStorage INTEGER,     name VARCHAR(255),     ram INTEGER,     PRIMARY KEY (id) ) [42101-224]

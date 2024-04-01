@@ -1,0 +1,36 @@
+
+------------------------------------- properties
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a application.properties file compatible for Quarkus, write its equivalent Spring Boot version. Dont add any text or explanation before and after the code.
+
+------------------------------------- Entity
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a Entity class written in Quarkus, write its equivalent Spring Boot version. Use lombok, jakarta not javax, and best coding practices. Add all imports. Dont add any text or explanation before and after the code.
+
+------------------------------------- PanacheEntity
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a Entity class written in Quarkus extending PanacheEntity, write its equivalent Spring Boot version. Separate the code into Entity and Repository layer. Add all filter methods for each attribute. Use Hibernate, lombok, jakarta, and best coding practices. Add all imports. Dont add any text or explanation before and after the code.Do not add any "Note" at the end.
+
+------------------------------------- Repository
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a Repository class written in Quarkus write its equivalent Spring Boot version. Use Hibernate-JpaRepository, lombok, jakarta, and best coding practices. Add all imports. Add all filter methods for each attribute referring the Laptop Entity shared for referrence. Dont add any text or explanation before and after the code.Do not add any "Note" at the end.
+
+------------------------------------- Service
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a Service class written in Quarkus, write its equivalent Spring Boot version. Use lombok, jakarta, and best coding practices. Dont add any text or explanation before and after the code.
+
+------------------------------------- Controller
+Consider yourself as a seasoned Quarkus and Spring Boot developer. Given a Resource class written in Quarkus, write its equivalent Spring Boot Controller version. Use lombok, jakarta, and best coding practices. Dont add any text or explanation before and after the code. Don't add any Notes.
+
+------------------------------------- Junit Test Cases - Integration
+I am sharing a resource class written using Quarkus framework. It has all the exposed API paths. write API integration test for this resource. Mock the LaptopService instead of Injecting it. Use Quarkus favoured QuarkusTest. Use the below Laptop entity class for reference.
+
+@Entity
+public class Laptop {
+
+    @Id
+    String id;
+
+    String name;
+    String brand;
+    int ram;
+    int externalStorage;
+}
+
+------------------------------------- pom.xml
+Given the pom.xml. I want to replace the Quarkus dependency to equivalent Spring dependencies. Use latest stable version for each dependency. Use Java 21. Dont add any text or explanation before and after the code.

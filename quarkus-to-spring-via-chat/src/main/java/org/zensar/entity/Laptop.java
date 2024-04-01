@@ -20,4 +20,12 @@ public class Laptop {
 
     private int externalStorage;
 
+    // later added
+    public Laptop(String id, String name, String brand, int ram, int externalStorage) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.ram = ram;
+        this.externalStorage = externalStorage;
+    }
 }
